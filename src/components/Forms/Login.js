@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
 
@@ -8,6 +9,8 @@ const Login = () => {
     login: '',
     password: ''
   })
+
+  const {login} = useContext(AuthContext)
 
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value })
@@ -20,7 +23,10 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then(response => console.log(response))
+      }).then(response => {
+        login(response.data.token, response.data.userId)
+        window.location.href = "/techniques"
+      })
     } catch (error) {
       console.log("Ошибка во фронте - Логин");
     }
@@ -51,13 +57,11 @@ const Login = () => {
       </div>
       <div className="first-right-form-button">
         <div className="common-button-top">
-          <Link to="/techniques">
-            <button
-              type="button"
-              className="common-button"
-              onClick={loginHandler}
-            >Войти</button>
-          </Link>
+          <button
+            type="button"
+            className="common-button"
+            onClick={loginHandler}
+          >Войти</button>
         </div>
         <div className="common-button-bottom">
           <Link to="/registration">

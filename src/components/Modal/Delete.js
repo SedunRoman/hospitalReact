@@ -1,9 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback } from "react";
+import axios from "axios";
 
-const Delete = () => {
+const Delete = ({ todo, deleteFlag, setDeleteFlag }) => {
+
+  const removeTodos = useCallback(async (id) => {
+    try {
+      await axios.delete(`/api/todo/delete/${id}`, { id }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(() => {
+          setDeleteFlag(false)
+        })
+    } catch (error) {
+      console.log(error)
+    }
+  }, [setDeleteFlag])
+
   return (
-    <div className="modal-del_wrapper">
+    <div className={deleteFlag ? 'modal-del_wrapper' : 'inactive'}>
       <div className="modal-del modal-del__small">
         <div className="modal-del-header">
           Удалить прием
@@ -12,12 +28,15 @@ const Delete = () => {
           Вы действительно хотите удалить прием?
         </div>
         <div className="modal-del-bottom">
-          <Link to="/techniques">
-            <button type="button" className="common-button btn_cancel" onClick={() => { window.location.href = "/techniques" }}>Cancel</button>
-          </Link>
-          <Link to="/techniques">
-            <button type="button" className="common-button btn_save" onClick={() => { window.location.href = "/techniques" }}>Delete</button>
-          </Link>
+          <button type="button" className="common-button btn_cancel"
+            onClick={() => { window.location.href = "/techniques" }}
+          >Cancel</button>
+          <button type="button" className="common-button btn_save"
+            onClick={() => {
+              removeTodos(todo._id)
+              window.location.href = "/techniques"
+            }}
+          >Delete</button>
         </div>
       </div>
     </div>

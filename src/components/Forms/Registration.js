@@ -20,7 +20,10 @@ const Registration = () => {
         headers: {
           'Content-Type': 'application/json'
         }
-      }).then(response => console.log(response))
+      }).then(response => {
+        console.log(response)
+        window.location.href = "/login"
+      })
     } catch (error) {
       console.log("Ошибка во фронте - Регистрация");
     }
@@ -52,7 +55,7 @@ const Registration = () => {
           <div className="first-right-form-fields-login-title">Repeat password:</div>
           <input
             type="password"
-            name="Repeat password"
+            name="rep_password"
             placeholder="Repeat password"
             onChange={changeHandler}
           />

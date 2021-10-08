@@ -27,17 +27,17 @@ const Header = () => {
             </Router>
           </div>
         </div>
-        <div className="header-button">
-          <Router>
-            <Switch>
-              <Route path="/techniques">
+        <Router>
+          <Switch>
+            <Route path="/techniques">
+              <div className="header-button">
                 <Link to="/login">
                   <button type="button" className="common-button" onClick={() => { window.location.href = "/login" }}>Выход</button>
                 </Link>
-              </Route>
-            </Switch>
-          </Router>
-        </div>
+              </div>
+            </Route>
+          </Switch>
+        </Router>
       </header>
     </div>
   );

@@ -1,74 +1,95 @@
 import React from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import TextField from "@material-ui/core/TextField";
 
-class Sort extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      startDate: new Date()
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
+const Sort = ({
+  todos,
+  setTodos,
+  dateFilter,
+  setDateFilter,
+  contentFilter,
+  setContentFilter
+}) => {
 
-  handleChange(date) {
-    this.setState({
-      startDate: date
-    });
-  }
+  const Direction = [
+    { name: "increasing", value: "По возрастанию" },
+    { name: "Decreasing", value: "По убыванию" },
+  ];
 
-  render() {
-    return (
-      <div className="sort_block">
-        <div className="reviews-left-elem">
-          <div className="reviews-left-elem-text">Сортировать по:</div>
-          <div className="reviews-left-elem-select">
-            <select defaultValue={'DEFAULT'}>
-              <option value="DEFAULT" disabled></option>
-              <option>Имя</option>
-              <option>Врач</option>
-              <option>Дата</option>
-              <option>Жалобы</option>
-            </select>
-          </div>
+  const allSort = [
+    { name: "", value: "" },
+    { name: "name", value: "Имя" },
+    { name: "doctor", value: "Врач" },
+    { name: "text", value: "Жалобы" },
+  ];
+
+  return (
+    <div className="sort_block">
+      <div className="reviews-left-elem">
+        <div className="reviews-left-elem-text">Сортировать по:</div>
+        <div className="reviews-left-elem-select">
+          <TextField
+            select
+            SelectProps={{
+              native: true,
+            }}
+          >
+            {allSort.map((i) => (
+              <option key={i.name} value={i.name}>
+                {i.value}
+                {console.log(i.name)}
+              </option>
+            ))}
+          </TextField>
         </div>
-        <div className="reviews-left-elem">
-          <div className="reviews-left-elem-text">Направление:</div>
-          <div className="reviews-left-elem-select">
-            <select defaultValue={'DEFAULT'}>
-              <option value="DEFAULT" disabled></option>
-              <option>По возрастанию</option>
-              <option>По убыванию</option>
-            </select>
-          </div>
+      </div>
+      <div className={contentFilter ? "reviews-left-elem_hide" : "reviews-left-elem"}>
+        <div className="reviews-left-elem-text">Направление:</div>
+        <div className="reviews-left-elem-select">
+          <TextField
+            select
+            SelectProps={{
+              native: true,
+            }}
+          >
+            {Direction.map((i) => (
+              <option key={i.name} value={i.name}>
+                {i.value}
+              </option>
+            ))}
+          </TextField>
         </div>
-        <div className="reviews-left-elem">
-          <div className="reviews-left-elem-text">Добавить фильтр по дате:</div>
-          <button type="button" className="btn-filter"></button>
-        </div>
+      </div>
+      <div className="reviews-left-elem reviews-left-elem__sort">
+        <div className="reviews-left-elem-text">Добавить фильтр по дате:</div>
+        <button type="button" className="btn-filter"
+          onClick={() => setDateFilter(true)}
+        ></button>
+      </div>
+      <div className="sortBottom">
         <div className="reviews-left-elem">
           <div className="reviews-left-elem-text">c:</div>
-          <DatePicker
-            selected={this.state.startDate}
-            onChange={this.handleChange}
+          <TextField
+            type="date"
           />
         </div>
         <div className="reviews-left-elem">
           <div className="reviews-left-elem-text">по:</div>
-          <DatePicker
-            selected={this.state.startDate}
-            onChange={this.handleChange}
+          <TextField
+            type="date"
           />
         </div>
-        <div className="reviews-left-elem">
-          <button type="button" className="common-button">Фильтровать</button>
-        </div>
-        <div className="reviews-left-elem">
-          <button type="button" className="btn-basket"></button>
+        <div className="reviews-left-elem reviews-left-elem__btn">
+          <button type="button" className="common-button"
+           onClick={() => setContentFilter(false)}>
+             Фильтровать</button>
+          <button type="button" className="btn-basket"
+            // onClick={() => setDateFilter(false)}
+            onClick={() => setContentFilter(true)}
+          ></button>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Sort;

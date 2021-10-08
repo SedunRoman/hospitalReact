@@ -1,77 +1,125 @@
-import React from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
+import React, { useCallback, useState } from "react";
+import axios from "axios";
+import TextField from "@material-ui/core/TextField";
 
-class Edit extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      startDate: new Date()
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
+const Edit = ({ todos, todo, editFlag, setTodos, getTodo }) => {
 
-  handleChange(date) {
-    this.setState({
-      startDate: date
-    });
-  }
+  const [inputValue, setInputValue] = useState({})
 
-  render() {
-    return (
-      <div className="modal-del_wrapper">
-        <div className="modal-del">
-          <div className="modal-del-header">
-            Изменить прием
+  const onClickEdit = useCallback(async (id) => {
+    try {
+      await axios.put(`/api/todo/edit/${id}`, {
+        name_input: inputValue.name_input,
+        doc_select: inputValue.doc_select,
+        date_input: inputValue.date_input,
+        text_input: inputValue.text_input
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => {
+          setTodos([...todos], response.data)
+          getTodo()
+        })
+    } catch (error) {
+      console.log(error)
+    }
+
+  }, [getTodo, todos, inputValue, setTodos])
+
+  const allDocSelect = [
+    { name: "", value: `${todo.doc_select}` },
+    { name: "Manchenko Anatoliy", value: "Manchenko Anatoliy" },
+    { name: "Sedun Roman", value: "Sedun Roman" },
+    { name: "Krivochenko Viktoria", value: "Krivochenko Viktoria" },
+    { name: "Usatova Darya", value: "Usatova Darya" },
+  ];
+
+  return (
+    <div className={editFlag ? 'modal-del_wrapper' : 'inactive'}>
+      <div className="modal-del">
+        <div className="modal-del-header">
+          Изменить прием
+        </div>
+        <div className="modal-del-content">
+          <div className="modal-del-header-elem">
+            <p>
+              Имя:
+            </p>
+            <textarea
+              defaultValue={todo.name_input}
+              value={inputValue.name_input}
+              onChange={e => setInputValue({
+                ...inputValue,
+                name_input: e.target.value
+              })}
+            ></textarea>
           </div>
-          <div className="modal-del-content">
-            <div className="modal-del-header-elem">
-              <p>
-                Имя:
-              </p>
-              <input type="text" />
-            </div>
-            <div className="modal-del-header-elem">
-              <p>
-                Врач:
-              </p>
-              <div className="modal-del-header-elem-select">
-                <select>
-                  <option value="value" disabled>Направление:</option>
-                  <option>По возрастанию</option>
-                  <option>По убыванию</option>
-                </select>
-              </div>
-            </div>
-            <div className="modal-del-header-elem">
-              <p>
-                Дата:
-              </p>
-              <DatePicker
-                selected={this.state.startDate}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="modal-del-header-elem">
-              <p>
-                Жалобы:
-              </p>
-              <textarea></textarea>
+          <div className="modal-del-header-elem">
+            <p>
+              Врач:
+            </p>
+            <div className="modal-del-header-elem-select">
+              <TextField
+                select
+                onChange={e => setInputValue({
+                  ...inputValue,
+                  doc_select: e.target.value
+                })}
+                SelectProps={{
+                  native: true,
+                }}
+              >
+                {allDocSelect.map((i) => (
+                  <option key={i.name} value={i.name}>
+                    {i.value}
+                  </option>
+                ))}
+              </TextField>
             </div>
           </div>
-          <div className="modal-del-bottom">
-            <Link to="/techniques">
-              <button type="button" className="common-button btn_cancel" onClick={() => { window.location.href = "/techniques" }}>Cancel</button>
-            </Link>
-            <Link to="/techniques">
-              <button type="button" className="common-button btn_save" onClick={() => { window.location.href = "/techniques" }}>Save</button>
-            </Link>
+          <div className="modal-del-header-elem modal-del-header-elem__date">
+            <p>
+              Дата:
+            </p>
+            <TextField
+              type="date"
+              value={inputValue.date_input}
+              onChange={e => setInputValue({
+                ...inputValue,
+                date_input: e.target.value
+              })}
+            />
+          </div>
+          <div className="modal-del-header-elem">
+            <p>
+              Жалобы:
+            </p>
+            <textarea
+              defaultValue={todo.text_input}
+              value={inputValue.text_input}
+              onChange={e => setInputValue({
+                ...inputValue,
+                text_input: e.target.value
+              })}
+            ></textarea>
           </div>
         </div>
+        <div className="modal-del-bottom">
+          <button type="button" className="common-button btn_cancel"
+            onClick={() => { window.location.href = "/techniques" }}
+          >Cancel</button>
+          <button type="button" className="common-button btn_save"
+            onClick={() => {
+              onClickEdit(todo._id)
+              window.location.href = "/techniques"
+            }}
+          >Save</button>
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Edit;

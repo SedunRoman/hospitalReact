@@ -177,7 +177,7 @@ header {
 .common-button-top {
   button {
     width: auto;
-  
+
     margin-bottom: 8px;
   }
 }
@@ -205,7 +205,8 @@ header {
   justify-content: space-between;
   max-width: 989px;
   min-height: 122px;
-  margin: 10px auto 0;
+  margin: 0 auto;
+  //margin: 10px auto 0;
   padding: 20px;
 }
 
@@ -220,7 +221,8 @@ header {
     margin-right: 0;
   }
 
-  input, select {
+  input,
+  select {
     width: 188px;
     height: 45px;
     font-style: normal;
@@ -245,6 +247,64 @@ header {
       border: 1px solid rgba(0, 0, 0, 1);
     }
   }
+
+  .css-1o2jng6-MuiOutlinedInput-notchedOutline {
+    top: 0;
+    border: none;
+  }
+}
+
+.reviews-left-elem__date {
+  input {
+    border: none;
+
+    &:focus {
+      border: none;
+    }
+  }
+
+  .css-1o2jng6-MuiOutlinedInput-notchedOutline {
+    top: 0;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+    background-color: #fff;
+  }
+}
+
+.modal-del-header-elem__date {
+  margin-bottom: 20px !important;
+
+  input {
+    border: none;
+    margin-bottom: 0 !important;
+
+    &:focus {
+      border: none;
+    }
+  }
+
+  .css-1o2jng6-MuiOutlinedInput-notchedOutline {
+    top: 0;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+    display: block !important;
+    width: 100% !important;
+    background-color: #fff;
+  }
+
+  .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+    display: block;
+  }
 }
 
 .reviews-left-elem-select {
@@ -255,8 +315,22 @@ header {
   select {
     appearance: none;
     background: none;
-    background: url(image/1.svg) no-repeat top 17px right 11px;
     padding: 10px 30px 10px 10px;
+    background-color: #fff !important;
+  }
+
+  .MuiInput-root {
+    border: none;
+    box-shadow: none;
+  }
+
+  .css-1o2jng6-MuiOutlinedInput-notchedOutline {
+    top: 0;
+    border: none;
+  }
+
+  .MuiInput-underline:before {
+    content: none !important;
   }
 }
 
@@ -268,7 +342,7 @@ header {
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 11px;
     right: 12px;
@@ -292,7 +366,7 @@ header {
 
   .common-button {
     min-width: 100%;
-    font-size: 18px;    
+    font-size: 18px;
   }
 }
 
@@ -336,19 +410,25 @@ header {
   background: url(image/3.svg) no-repeat;
   border: none;
   outline: none;
+  margin-left: 10px;
 }
 
 .btn-basket {
-  width: 24px;
+  width: 28px;
   height: 30px;
   background: url(image/4.svg) no-repeat;
   border: none;
   outline: none;
+  margin-left: 20px;
+}
+
+.inactive {
+  display: none;
 }
 
 .main_content {
-  max-width: 941px;
-  margin: 0 auto 40px;
+  width: 941px;
+  margin: 40px auto 40px;
 }
 
 .main_content-title {
@@ -356,24 +436,24 @@ header {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
-  background: #C4C4C4;
+  background: #c4c4c4;
 }
 
 .main_content-title-elem {
-  width: 25%;
+  width: 215px;
   padding: 11px;
   text-align: center;
 
   &:nth-of-type(3n) {
-    width: 15%;
+    width: 135px;
   }
 
   &:nth-of-type(4n) {
-    width: 35%;
+    width: 312px;
   }
 
   &:nth-of-type(5n) {
-    width: 10%;
+    width: 100px;
   }
 }
 
@@ -393,23 +473,24 @@ header {
 .main_content-block-elem-item {
   display: flex;
   flex-wrap: nowrap;
+  overflow: hidden;
   flex-direction: row;
   justify-content: center;
-  width: 25%;
+  width: 215px;
   padding: 20px 10px;
   border-right: 1px solid #000000;
 
   &:nth-of-type(3n) {
-    width: 15%;
+    width: 135px;
   }
 
   &:nth-of-type(4n) {
-    width: 35%;
+    width: 312px;
   }
 
   &:nth-of-type(5n) {
     align-items: center;
-    width: 10%;
+    width: 100px;
     padding: 20px 10px;
   }
 }
@@ -485,7 +566,6 @@ header {
 }
 
 .modal-del-header-elem {
-
   p {
     font-style: normal;
     font-weight: 300;
@@ -495,7 +575,9 @@ header {
     margin-bottom: 8px;
   }
 
-  input, select, textarea {
+  input,
+  select,
+  textarea {
     width: 100%;
     height: 40px;
     font-style: normal;
@@ -523,27 +605,50 @@ header {
   }
 
   textarea {
-    height: 105px;
+    height: 40px;
     resize: none;
-    padding: 20px;
+    padding: 9px 9px 8px 9px;
   }
 
   .react-datepicker__input-container {
-
     &::before {
-      content: '';
+      content: "";
       top: 9px;
     }
   }
 }
 
 .modal-del-header-elem-select {
+  margin-bottom: 20px;
 
   select {
     appearance: none;
     background: none;
-    background: url(image/1.svg) no-repeat top 17px right 11px;
     padding: 10px 30px 10px 10px;
+    background-color: #fff !important;
+    margin-bottom: 0;
+  }
+
+  .MuiInput-root {
+    display: block;
+    border: none;
+    box-shadow: none;
+  }
+
+  .MuiFormControl-root {
+    display: block;
+  }
+
+  .MuiInput-underline:before {
+    content: none !important;
+  }
+  .css-1o2jng6-MuiOutlinedInput-notchedOutline {
+    top: 0;
+    border: none;
+  }
+
+  .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    display: block;
   }
 }
 
@@ -561,10 +666,10 @@ header {
   .btn_cancel {
     margin-right: 12px;
   }
-  
+
   .btn_save {
     border: 2px solid rgba(0, 0, 0, 0);
-    background: #C5E9FFB8;
+    background: #c5e9ffb8;
 
     &:hover {
       background: rgba(0, 0, 0, 0.2);
@@ -576,3 +681,233 @@ header {
   }
 }
 
+.reviews-left-elem_hide {
+  display: none;
+}
+
+.sortBottom {
+  display: flex;
+}
+
+@media only screen and (max-width: 1023.98px) {
+  header {
+    max-width: 340px;
+    margin: 0 auto;
+    box-shadow: none;
+    padding: 20px 10px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
+  }
+
+  .reviews-left-elem-select {
+    width: 100%;
+
+    select {
+      width: 100%;
+    }
+  }
+
+  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 100%;
+  }
+
+
+  .sortBottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+      width: 100%;
+    }
+  }
+
+  .sort_block {
+    max-width: 340px;
+    margin: 0 auto;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .reviews {
+    flex-wrap: wrap;
+    align-content: flex-start;
+    max-width: 340px;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+  }
+
+  .main_content_wrapper {
+    width: 100%;
+    max-width: 941px;
+    overflow-x: scroll;
+    padding: 20px 0 0 0;
+    margin-bottom: 20px;
+  }
+  .main_content {
+    margin: 0;
+  }
+
+  .first_content {
+    width: 100%;
+    padding: 30px 10px;
+    flex-direction: column;
+  }
+
+  .first-left {
+    width: 100%;
+    max-width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+
+    svg {
+      width: 100%;
+      height: 150px;
+    }
+  }
+
+  .first-right {
+    width: 100%;
+    max-width: 340px;
+    padding: 40px 20px 24px;
+  }
+
+  .first-right-form-title {
+    font-size: 30px;
+  }
+
+  .common-global_bottom {
+    padding: 0 10px;
+    margin-bottom: 60px;
+  }
+
+  .reviews-left {
+    width: 100%;
+
+    .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+      width: 100%;
+    }
+
+    .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+      width: 100%;
+    }
+
+    .reviews-left-elem input,
+    .reviews-left-elem select {
+      width: 100%;
+    }
+  }
+
+  .sort_block {
+    padding: 35px 10px;
+
+    .reviews-left-elem {
+      margin: 0 auto 10px;
+    }
+    .reviews-left-elem-text,
+    .reviews-left-elem-select {
+      margin: 0 0 5px 0 !important;
+    }
+  }
+
+  .reviews-left-elem {
+    width: 100%;
+    margin: 0 auto 20px;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .reviews-right {
+    margin: 0 auto;
+  }
+
+  .sort_block {
+    .reviews-left-elem {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+    }
+
+    .reviews-left-elem__sort {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .btn-basket {
+      width: 30px;
+      margin-left: 10px;
+    }
+
+    .reviews-left-elem__btn {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .reviews-left {
+    flex-direction: column;
+  }
+
+  .common-button {
+    font-size: 20px;
+  }
+
+  .header-left {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .header-left-logo {
+    width: 60px;
+  }
+
+  .header-left-text {
+    margin-left: 20px;
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .first-right-form-title {
+    margin-bottom: 20px;
+  }
+
+  .modal-del-header {
+    font-size: 24px;
+    padding: 20px;
+  }
+
+  .modal-del-header-elem input,
+  .modal-del-header-elem select,
+  .modal-del-header-elem textarea {
+    margin-bottom: 12px;
+  }
+
+  .modal-del-content {
+    padding: 20px;
+  }
+
+  .modal-del-block {
+    font-size: 20px;
+  }
+
+  .common-button {
+    min-width: 120px;
+  }
+
+  .modal-del-bottom {
+    button {
+      width: 130px;
+    }
+  }
+
+  .modal-del {
+    bottom: auto;
+  }
+}
